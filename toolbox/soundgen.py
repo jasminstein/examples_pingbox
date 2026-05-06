@@ -84,4 +84,43 @@ def generate_f_from_greenwood(f_min, f_max, f_num):
     x_map = np.linspace(xmin, xmax, f_num)
     freqs = aA * (10**( a*x_map ) - k)
 
-    return freqs       
+    return freqs  
+
+def generate_pure_tone(f, fs, duration):
+
+    '''
+    Generate pure tone with specific frequency, sample rate, and duration
+
+    Args:
+        f: frequency in Hz
+        fs: sample rate
+        duration: duration in seconds
+
+    Returns:
+        sound: numpy array corresponding to pure tone
+    '''
+
+    t = np.linspace(0, duration, int(fs * duration), endpoint=False)
+    sound = np.sin(2 * np.pi * f * t)
+
+    return sound
+
+
+def generate_white_noise(fs, duration, amplitude=1.0):
+
+    '''
+    Generate white noise with specific sample rate, duration, and amplitude
+
+    Args:
+        fs: sample rate
+        duration: duration in seconds
+        amplitude: amplitude (default = 1)
+
+    Returns:
+        sound: numpy array corresponding to white noise
+    '''  
+
+    sound = np.random.normal(0, 1, int(duration * fs)) 
+    sound = sound*amplitude
+
+    return sound          
