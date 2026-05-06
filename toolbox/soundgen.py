@@ -58,4 +58,30 @@ def generate_hct(f0, fs, duration, num, harmonics_type='1/n', harmonic_factor=0.
     if normalize:
         sound /= np.max(np.abs(sound))
 
-    return sound    
+    return sound 
+
+def generate_f_from_greenwood(f_min, f_max, f_num):
+
+    '''
+    Generate frequencies based on Greenwood function (Cochlear spacing)
+
+    Args:
+        f_min: minimum frequency in Hz
+        f_max: maximum frequency in Hz
+        f_num: number of frequencies
+
+    Returns:
+        freqs: array containing frequencies in Hz
+    '''
+    
+    aA = 165.4
+    k = 0.88
+    a = 2.1
+
+    xmin = np.log10(f_min / aA + k) / a
+    xmax = np.log10(f_max / aA + k) / a
+
+    x_map = np.linspace(xmin, xmax, f_num)
+    freqs = aA * (10**( a*x_map ) - k)
+
+    return freqs       
