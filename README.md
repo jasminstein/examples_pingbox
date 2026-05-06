@@ -4,6 +4,7 @@
 - numpy (version)
 - pydsm (version)
 - scipy (version)
+- psychopy (version)
 
 ## Variables
 
