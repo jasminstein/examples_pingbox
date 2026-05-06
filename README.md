@@ -8,7 +8,7 @@
 ## Variables
 
 - f = frequency
-- sound = arary/list corresponding to sound
+- sound = numpy array corresponding to sound
 - fs = sample rate
 - phon = loudness in phons
 - spl = sound pressure level (in db)

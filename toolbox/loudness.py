@@ -5,7 +5,7 @@
 from pydsm.iso226 import iso226_spl_itpl
 import numpy as np
 
-def compute_loudness_gain(f, sound, phon=65):
+def compute_loudness_contour(f, sound, phon=65):
     
     '''
     Apply equal loudness contours as described by ISO226 (attention: only valid for pure tones)
