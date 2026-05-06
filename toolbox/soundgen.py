@@ -3,6 +3,7 @@
 # -----------------------------------------------------------------------------------#
 
 import numpy as np
+from toolbox.loudness import compute_loudness_contour, set_db_spl
 
 def geometric_decay(num, harmonic_factor):
 
@@ -123,4 +124,52 @@ def generate_white_noise(fs, duration, amplitude=1.0):
     sound = np.random.normal(0, 1, int(duration * fs)) 
     sound = sound*amplitude
 
-    return sound          
+    return sound
+    
+
+def generate_pure_tone_cloud(mean, std_dev, fs, duration, num, isi_frac=0.1, phon=65):
+
+
+    ''' generate pure tone "clouds" from a mean and standard deviation
+
+    Args:
+        mean: mean of pure tone cloud
+        std_dev: standard deviation of pure tone cloud
+        fs: sample rate
+        duration: full cloud duration in seconds
+        num: numer of pure tones in cloud
+        isi_frac: which fraction of full duration is supposed to be isi (sum of all ISIs)
+        phon: phon level to normalize tones to
+
+    Returns:
+        sound_cloud: numpy array corresponding to pure tone cloud
+    ''' 
+
+    isi_duration = duration*isi_frac
+    tone_duration = (duration - isi_duration)/num
+    isi = isi_duration/(num - 1)
+
+    sound = []
+
+    freq = np.random.normal(loc=mean, scale=std_dev, size=num) # sample tones from normal distribution
+    # TODO: find a better sampling method!
+    
+    for ind, f in enumerate(freq):
+
+        t_sound = np.linspace(0, tone_duration, int(fs * tone_duration), endpoint=False)
+        sound_n = np.sin(2 * np.pi * f * t_sound)
+
+        sound_eq_iso, spl_required  = compute_loudness_contour(f, sound_n, phon) 
+        sound.append(sound_eq_iso)
+
+        #TODO: potentially add hanning windows to each sound
+        
+        if ind < (num-1):
+            t_isi = np.zeros(int(isi*fs))
+            sound.append(t_isi)
+
+
+    sound_cloud = [x for sub in sound for x in sub]
+    sound_cloud = np.array(sound, dtype=float)
+
+    return sound_cloud            
