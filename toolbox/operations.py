@@ -40,7 +40,7 @@ def apply_hanning(sound, fs, ramp_time):
         sound_out: sound incl. applied hanning window
     '''
 
-    ramp_samples = int(sample_rate * ramp_time)
+    ramp_samples = int(fs * ramp_time)
     full_window = np.hanning(2 * ramp_samples)
     ramp_in = full_window[:ramp_samples]
     ramp_out = full_window[ramp_samples:]
