@@ -5,8 +5,21 @@
 import numpy as np
 
 import psychopy
+from psychopy.hardware import keyboard
+
 import psychtoolbox as ptb
 from psychtoolbox import PsychPortAudio
+
+
+def setup_prefs():
+
+    '''set hardware prefs to ptb: ATTENTION: still use backend='ptb' for keyboards and such'''
+
+    from psychopy import prefs
+
+    prefs.hardware['keyboard'] = 'ptb'
+    prefs.hardware['audioLib'] = 'ptb'
+    prefs.hardware['audioLatencyMode'] = '4' 
 
 def wait_trigger(key=['5'], num=5):
 
