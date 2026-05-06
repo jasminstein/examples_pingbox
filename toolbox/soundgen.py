@@ -3,7 +3,8 @@
 # -----------------------------------------------------------------------------------#
 
 import numpy as np
-from toolbox.loudness import compute_loudness_contour, set_db_spl
+from toolbox.loudness import compute_loudness_contour
+from toolbox.operations import normalize
 
 def geometric_decay(num, harmonic_factor):
 
@@ -57,7 +58,7 @@ def generate_hct(f0, fs, duration, num, harmonics_type='1/n', harmonic_factor=0.
         sound += amplitude * np.sin(2 * np.pi * f0 * multiple * t)
 
     if normalize:
-        sound /= np.max(np.abs(sound))
+        sound = normalize(sound, reference = None)
 
     return sound 
 
@@ -125,7 +126,7 @@ def generate_white_noise(fs, duration, amplitude=1.0):
     sound = sound*amplitude
 
     return sound
-    
+
 
 def generate_pure_tone_cloud(mean, std_dev, fs, duration, num, isi_frac=0.1, phon=65):
 

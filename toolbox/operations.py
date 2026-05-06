@@ -77,4 +77,26 @@ def bandpass_filter(sound, fs, lowcut, highcut, numtaps=2001):
 
     sound_out = filtfilt(fir_coeffs, [1.0], sound)  
 
-    return sound_out    
+    return sound_out 
+
+def normalize(sound, reference=None):
+
+    '''
+    Normalizes sound to amplitude 1 or by a chosed reference value (e.g. an empirically defined overall maximum value)
+
+    Args:
+        sound: array corresponding to sound
+        reference: if desired different reference value to normalize by
+
+    Returns:
+        sound_out: normalized sound
+    '''
+
+    sound = np.asarray(sound, dtype=float)
+
+    if reference is None:
+        sound_out = sound / np.max(np.abs(sound)) 
+    else:
+        sound_out = sound / reference
+
+    return sound_out         
