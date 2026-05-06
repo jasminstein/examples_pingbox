@@ -75,6 +75,6 @@ def bandpass_filter(sound, fs, lowcut, highcut, numtaps=2001):
                         pass_zero=False,
                         fs=fs)
 
-    sound_out = filtfilt(fir_coeffs, [1.0], noise)  
+    sound_out = filtfilt(fir_coeffs, [1.0], sound)  
 
     return sound_out    
