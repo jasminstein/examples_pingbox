@@ -20,7 +20,7 @@ def plot_signal(sound, fs):
     plt.xlabel('Time [s]')
     plt.ylabel('Amplitude')
     plt.grid(True)
-    plt.legend()
+    plt.show()
 
 
 def plot_spectrum(sound, fs):
