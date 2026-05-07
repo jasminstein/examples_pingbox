@@ -3,6 +3,7 @@
 # -----------------------------------------------------------------------------------#
 
 from pydsm.iso226 import iso226_spl_itpl
+import pyloudnorm as pyln
 import numpy as np
 
 def compute_loudness_contour(f, sound, phon=65):
@@ -44,4 +45,22 @@ def set_db_spl(sound, spl):
 
     sound_out = sound * 10**(dbspl / 20.0) * p0 / rms
 
-    return sound_out    
+    return sound_out  
+
+def measure_loudness_lufs_pyloudnorm(sound, fs):  
+
+    '''
+    Measure loudness in LUFS using pyloudnorm package
+
+    Args:
+        sound: array corresponding to a 
+        fs: sample rate
+
+    Returns:
+        loudness: loudness in LUFS  
+    '''
+
+    meter = pyln.Meter(fs) 
+    loudness = meter.integrated_loudness(sound)
+
+    return loudness
