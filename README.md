@@ -5,6 +5,7 @@
 - pydsm (version)
 - scipy (version)
 - psychopy (version)
+- matplotlib (version)
 
 ## Variables
 
