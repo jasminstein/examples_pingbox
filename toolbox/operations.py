@@ -99,4 +99,4 @@ def normalize(sound, reference=None):
     else:
         sound_out = sound / reference
 
-    return sound_out         
+    return sound_out

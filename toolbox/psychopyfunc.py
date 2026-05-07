@@ -21,6 +21,7 @@ def setup_prefs():
     prefs.hardware['audioLib'] = 'ptb'
     prefs.hardware['audioLatencyMode'] = '4' 
 
+
 def wait_trigger(key=['5'], num=5):
 
     '''
@@ -46,6 +47,7 @@ def wait_trigger(key=['5'], num=5):
     trigger_init = trigger_times[0]    
 
     return trigger_init, trigger_times
+    
 
 def open_audioport(fs, mode=1, latency=4, channels=1):
 
