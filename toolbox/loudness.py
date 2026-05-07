@@ -33,7 +33,7 @@ def set_db_spl(sound, spl):
     Set db SPL level for a given sound (from: https://github.com/mrkrd/thorns/blob/master/thorns/waves.py) 
 
     Args:
-        sound: array corresponding to a 
+        sound: array corresponding to a sound
         spl: desired sound pressure level in db
 
     Returns:
@@ -53,7 +53,7 @@ def measure_loudness_lufs_pyloudnorm(sound, fs):
     Measure loudness in LUFS using pyloudnorm package
 
     Args:
-        sound: array corresponding to a 
+        sound: array corresponding to a sound
         fs: sample rate
 
     Returns:
